@@ -1,0 +1,68 @@
+Pagina de Deportes en Vivo y estadisticas
+
+Apis:
+SportRadar API
+
+Fonts-Family: 
+- Kanit - (Titulos)
+- MuseoModerno - (Sub-titulos)
+- Ubuntu - (General)
+
+Paleta de colores:
+#d9d9d8 (Gris-Blanco): Un tono suave que funciona bien como fondo o color de apoyo.
+#525657 (Gris-Oscuro): Aporta seriedad y contrasta bien con el gris-blanco.
+#060203 (Negro): Ideal para texto o elementos que necesitan alta visibilidad.
+#648ea6 (Gris Azul): Añade un toque de color interesante y moderno, pero puede 
+necesitar un poco más de saturación para destacar.
+#313f60
+-Rojito (Opcional) 
+
+-Contenido de secciones
+
+Futbol
+Beisbol
+Baloncesto
+F1
+E-Sport (Competencias de videojuegos)
+Boxeo
+Lucha Libre (WWE)
+MMA (Artes Marciales Mixtas)
+
+Estructura:
+
+sports-app/
+├── public/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   │   ├── Football/
+│   │   │   ├── LiveMatch.js
+│   │   │   └── ... (otros componentes de fútbol)
+│   │   ├── Baseball/
+│   │   │   ├── LiveMatch.js
+│   │   ├── Basketball/
+│   │   │   ├── LiveMatch.js
+│   │   ├── F1/
+│   │   │   ├── LiveRace.js
+│   │   ├── Esports/
+│   │   │   ├── LiveMatch.js
+│   │   ├── Boxing/
+│   │   │   ├── LiveFight.js
+│   │   ├── WWE/
+│   │   │   ├── LiveEvent.js
+│   │   ├── MMA/
+│   │   │   ├── LiveFight.js
+│   ├── pages/
+│   │   ├── FootballPage.js
+│   │   ├── BaseballPage.js
+│   │   ├── BasketballPage.js
+│   │   ├── F1Page.js
+│   │   ├── EsportsPage.js
+│   │   ├── BoxingPage.js
+│   │   ├── WWEPPage.js
+│   │   ├── MMAPage.js
+│   ├── services/
+│   │   ├── sportsApi.js
+├── App.js
+├── index.css
+├── main.jsx
