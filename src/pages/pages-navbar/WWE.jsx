@@ -1,15 +1,15 @@
 import Header from "../../components/Header";
 import Navbar from "../../components/Navbar";
 
-const Calendarios = () => {
+const WWE = () => {
    return (
       <div >
          <Header />
          <Navbar/>
          <div className="pt-14 pl-12 w-full">
-            Calendarios
+            WWE
          </div>
       </div>
    )
 }
- export default Calendarios;
+ export default WWE;

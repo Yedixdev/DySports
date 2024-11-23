@@ -1,8 +1,15 @@
-const Live = () => {
+import Header from "../../components/Header";
+import Navbar from "../../components/Navbar";
+
+const EnVivo = () => {
    return (
-    <div className="w-full h-screen  ">
-      hola lives
-  </div>
+      <div >
+         <Header />
+         <Navbar/>
+         <div className="pt-14 pl-12 w-full">
+            En vivos
+         </div>
+      </div>
    )
 }
- export default Live;
+ export default EnVivo;

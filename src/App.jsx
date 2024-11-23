@@ -1,19 +1,14 @@
-import './App.css'
+import './App.css';
 import { BrowserRouter } from 'react-router-dom';
-import RoutesHeader from './routes/routes-header';
-import Header from './components/Header';
-import Navbar from './components/Navbar/Navbar';
+import AppRoutes from './routes';
 
 function App() {
-
   return (
     <BrowserRouter>
-      <Header />
-      <Navbar/>
-      
-      <RoutesHeader />
+      <AppRoutes />
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;
+
