@@ -1,15 +1,15 @@
 import Header from "../../components/Header";
 import Navbar from "../../components/Navbar";
 
-const WWE = () => {
+const Accion = () => {
    return (
       <div >
          <Header />
          <Navbar/>
          <div className="pt-14 pl-12 w-full">
-            WWE
+            Accion
          </div>
       </div>
    )
 }
- export default WWE;
+ export default Accion;

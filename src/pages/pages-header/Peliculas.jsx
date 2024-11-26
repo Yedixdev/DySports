@@ -1,14 +1,14 @@
 import Header from "../../components/Header";
 import Navbar from "../../components/Navbar";
-const Deportes = () => {
+const Peliculas = () => {
    return (
       <div >
          <Header />
          <Navbar/>
          <div className="pt-14 pl-12 w-full">
-            Deportes
+            Peliculas
          </div>
       </div>
    )
 }
- export default Deportes;
+ export default Peliculas;

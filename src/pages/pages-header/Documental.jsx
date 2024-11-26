@@ -1,15 +1,15 @@
 import Header from "../../components/Header";
 import Navbar from "../../components/Navbar";
 
-const EnVivo = () => {
+const Documental = () => {
    return (
       <div >
          <Header />
          <Navbar/>
          <div className="pt-14 pl-12 w-full">
-            En vivos
+            Documental
          </div>
       </div>
    )
 }
- export default EnVivo;
+ export default Documental;
