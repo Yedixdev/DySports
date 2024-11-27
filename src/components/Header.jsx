@@ -14,7 +14,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="w-full h-14 fixed bg-slate-800 text-white flex justify-between px-10 items-center z-50 shadow-lg shadow-gray-800">
+    <header className="w-full h-14 fixed bg-slate-800 text-white flex justify-between px-10 items-center z-50 shadow-xl shadow-[#2b384b]">
       <div className="flex items-center">
         <div className="text-2xl font-kanit italic">DyMovies</div>
       </div>

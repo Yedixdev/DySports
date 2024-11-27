@@ -23,6 +23,8 @@ import Romance from './pages/pages-navbar/Romance';
 import Suspenso from './pages/pages-navbar/Suspenso';
 import Terror from './pages/pages-navbar/Terror';
 import Error from './pages/Error';
+import Detalles from './components/detalles/DetallesMovies';
+import Destacadas from './components/home/Destacadas';
 
 const AppRoutes = () => {
   return (
@@ -50,6 +52,13 @@ const AppRoutes = () => {
       <Route path="/romance" element={<Romance />} />
       <Route path="/suspenso" element={<Suspenso />} />
       <Route path="/terror" element={<Terror />} />
+
+      {/* Rutas de navegacion de peliculas */}
+      <Route path="/destacadas" element={<Destacadas />} />
+      <Route path='/movie/:id' element={<Detalles/>} />
+      <Route path='/serie/:id' element={<Detalles/>} />
+
+      {/* Rutas de Paginas no Encontradas */}
       <Route path="/*" element={<Error />} />
     </Routes>
   );

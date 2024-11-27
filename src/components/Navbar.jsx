@@ -29,7 +29,7 @@ export default function Navbar() {
  
   return (
     <div
-      className={`fixed z-50 h-full bg-slate-800 text-gray-200 mt-14 transition-all duration-300 ${
+      className={`navbar fixed z-50 h-full bg-slate-800 text-gray-200 mt-14 transition-all duration-300 ${
         isOpen ? "w-52" : "w-12"
       }`}
     >
