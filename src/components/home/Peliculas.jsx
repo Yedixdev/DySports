@@ -6,8 +6,6 @@ import "slick-carousel/slick/slick-theme.css";
 
 const Peliculas = () => {
    const [movies, setMovies] = useState([]);
-   const [loading, setLoading] = useState(true);
-   const [error, setError] = useState(null);
    const [isOpen, setIsOpen] = useState(false);
    const [selectedMovieId, setSelectedMovieId] = useState(null);
    const [movieDetails, setMovieDetails] = useState(null);
@@ -85,11 +83,6 @@ const Peliculas = () => {
          <div className="flex items-center justify-between pr-5">
             <div className="font-kanit text-2xl italic text-gray-200">Películas Populares</div>
          </div>
-
-         {loading && <p className="text-gray-200">Cargando películas...</p>}
-         {error && <p className="text-red-500">Error: {error}</p>}
-
-         {!loading && !error && (
             <Slider {...sliderSettings}>
                {movies.map((movie) => (
                   <div key={movie.id} className="p-4">
@@ -116,7 +109,6 @@ const Peliculas = () => {
                   </div>
                ))}
             </Slider>
-         )}
 
          {isOpen && selectedMovieId && (
          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50">

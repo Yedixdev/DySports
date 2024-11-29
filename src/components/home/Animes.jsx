@@ -7,8 +7,6 @@ import "slick-carousel/slick/slick-theme.css";
 
 const Anime = () => {
    const [anime, setAnime] = useState([]);
-   const [loading, setLoading] = useState(true);
-   const [error, setError] = useState(null);
 
    const API_KEY = "fd2aa1886acbdc82f25d5629661a7850";
    const BASE_URL = "https://api.themoviedb.org/3";
@@ -70,10 +68,6 @@ const Anime = () => {
                Ver todos los Animes y Caricaturas
             </Link>
          </div>
-         {loading && <p className="text-gray-200">Cargando anime...</p>}
-         {error && <p className="text-red-500">Error: {error}</p>}
-
-         {!loading && !error && (
             <Slider {...sliderSettings}>
                {anime.map((anime) => (
                   <div key={anime.id} className="p-3">
@@ -98,7 +92,6 @@ const Anime = () => {
                   </div>
                ))}
             </Slider>
-         )}
       </div>
    );
 };
