@@ -27,7 +27,7 @@ const Series = () => {
          } catch (error) {
             console.error("Error al obtener las series:", error.message);
          }
-      };
+      }; 
 
       fetchSeries();
    }, []);

@@ -7,7 +7,11 @@ import "slick-carousel/slick/slick-theme.css";
 
 const Anime = () => {
    const [anime, setAnime] = useState([]);
-
+   const [isOpen, setIsOpen] = useState(false);
+   const [selectedAnimeId, setSelectedAnimeId] = useState(null);
+   const [animeDetails, setAnimeDetails] = useState(null);
+   const [isDetailsLoading, setIsDetailsLoading] = useState(false);
+ 
    const API_KEY = "fd2aa1886acbdc82f25d5629661a7850";
    const BASE_URL = "https://api.themoviedb.org/3";
 
@@ -28,8 +32,46 @@ const Anime = () => {
       };
 
       fetchAnime();
-
    }, []);
+
+   const fetchAnimeDetails = async (id) => {
+      try {
+         setIsDetailsLoading(true);
+         const [detailsResponse, providersResponse] = await Promise.all([
+            fetch(`${BASE_URL}/tv/${id}?api_key=${API_KEY}`), // Detalles de la serie
+            fetch(`${BASE_URL}/tv/${id}/watch/providers?api_key=${API_KEY}`), // Proveedores
+         ]);
+   
+         if (!detailsResponse.ok || !providersResponse.ok) {
+            throw new Error("Error al obtener los detalles del anime o sus proveedores.");
+         }
+   
+         const detailsData = await detailsResponse.json();
+         const providersData = await providersResponse.json();
+   
+         setAnimeDetails({
+            ...detailsData,
+            watchLink: providersData.results?.US?.link || null, // Cambiar 'US' según la región deseada
+         });
+      } catch (error) {
+         console.error("Error al cargar los detalles del anime:", error.message);
+      } finally {
+         setIsDetailsLoading(false);
+      }
+   };
+
+   const openModal = (id) => {
+      setSelectedAnimeId(id);
+      fetchAnimeDetails(id);
+      setIsOpen(true);
+   }
+
+   const closeModal = () => {
+      setIsOpen(false);
+      setSelectedAnimeId(null);
+      setAnimeDetails(null);
+   };
+
 
    const sliderSettings = {
       speed: 500,
@@ -71,8 +113,8 @@ const Anime = () => {
             <Slider {...sliderSettings}>
                {anime.map((anime) => (
                   <div key={anime.id} className="p-3">
-                     <Link
-                        to={`/anime/${anime.id}`}
+                     <div
+                        onClick={()=> openModal(anime.id)}
                         className="flex flex-col items-center transform transition-transform duration-300 hover:scale-105"
                      >
                         {anime.poster_path ? (
@@ -88,10 +130,83 @@ const Anime = () => {
                         )}
                         <p className="text-gray-200 mt-2 text-center text-sm font-ubuntu">{anime.name}</p>
                         <p className="text-xs text-gray-400">{anime.first_air_date}</p>
-                     </Link>
+                     </div>
                   </div>
                ))}
             </Slider>
+            {isOpen && selectedAnimeId && (
+            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50">
+               <div className="bg-gray-100 text-gray-100 rounded-lg p-6 xl:w-[800px] md:w-1/2 relative shadow-xl transform transition-transform scale-95 hover:scale-100">
+                  <button
+                     onClick={closeModal}
+                     className="absolute top-4 right-4 text-gray-400 hover:text-red-600 text-xl"
+                  >
+                     ✖
+                  </button>
+
+                  {animeDetails ? (
+                     <div className="flex gap-6">
+                        <div className="flex-shrink-0">
+                           {animeDetails.poster_path && (
+                              <img
+                                 src={`https://image.tmdb.org/t/p/w400${animeDetails.poster_path}`}
+                                 alt={animeDetails.name}
+                                 className="rounded-lg shadow-lg w-full"
+                              />
+                           )}
+                        </div>
+
+                        <div className="flex flex-col gap-4">
+                           <h1 className="text-2xl font-bold text-red-600">{animeDetails.name}</h1>
+                           <p className="text-sm text-gray-800">{animeDetails.overview}</p>
+                           <div className="flex flex-wrap gap-2">
+                              {animeDetails.genres.map((genre, index) => (
+                                 <span
+                                    key={index}
+                                    className="px-3 py-1 bg-red-600 text-white rounded-full text-xs"
+                                 >
+                                    {genre.name}
+                                 </span>
+                              ))}
+                           </div>
+                           <p className="text-gray-800">
+                              <strong>Temporadas:</strong> {animeDetails.number_of_seasons}
+                           </p>
+                           <p className="text-gray-800">
+                              <strong>Capítulos:</strong> {animeDetails.number_of_episodes}
+                           </p>
+                           <p className="text-gray-800">
+                              <strong>Puntuación:</strong>{" "}
+                              <span className="text-red-600 font-bold">
+                                 {animeDetails.vote_average}/10
+                              </span>
+                           </p>
+                           <p className="text-gray-800">
+                              <strong>Fecha de estreno:</strong> {animeDetails.first_air_date}
+                           </p>
+
+                           {animeDetails.watchLink ? (
+                              <a
+                                 href={animeDetails.watchLink}
+                                 target="_blank"
+                                 rel="noopener noreferrer"
+                                 className="text-blue-500 underline hover:text-blue-300 mt-4"
+                              >
+                                 Ver en la plataforma
+                              </a>
+                           ) : (
+                              <p className="text-gray-500 mt-4">
+                                 No disponible en plataformas de streaming
+                              </p>
+                           )}
+                        </div>
+                     </div>
+                  ) : (
+                     <p className="text-gray-400">Cargando detalles...</p>
+                  )}
+               </div>
+            </div>
+         )}
       </div>
    );
 };
